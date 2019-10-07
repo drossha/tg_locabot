@@ -8,19 +8,21 @@ import (
 )
 
 var (
-	bot *tgbotapi.BotAPI
-	err error
+	bot    *tgbotapi.BotAPI
+	err    error
+	config Config
 )
 
 func init() {
-	config := LoadConfig()
+	config = LoadConfig()
+}
+
+func main() {
 	bot, err = tgbotapi.NewBotAPI(config.Token)
 	if err != nil {
 		log.Panic(err)
 	}
-}
 
-func main() {
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
 
